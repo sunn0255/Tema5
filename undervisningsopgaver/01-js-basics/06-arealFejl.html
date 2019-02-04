@@ -14,10 +14,17 @@
 		let lengde = prompt("Hva er lengden?");
 
 		function areal(l, b) {
-			return (lengde * bredde);
+			let a = (l * b);
+			if (a == 0) {
+				return (`Husk at lengde og bredde skal være tall. Prøv igjen!`);
+			} else if (isNaN(a)) {
+				return (`Feil! Prøv igjen med tall!`);
+			} else {
+				return (`Arealet er ${a}.\n Vil du regne ut et nytt areal?`);
+			}
 		}
 
-		let resultat = `Arealet er ${areal(lengde, bredde)} meter. Vil du ha et nytt areal utregnet?`;
+		let resultat = areal(lengde, bredde);
 
 		confirm(resultat);
 
