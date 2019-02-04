@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script>
+		let bredde = prompt("Hva er bredden?");
+		let lengde = prompt("Hva er lengden?");
+
+		function areal(l, b) {
+			return (lengde * bredde);
+		}
+
+		let resultat = `Arealet er ${areal(lengde, bredde)} meter. Vil du ha et nytt areal utregnet?`;
+		confirm(resultat);
+
+		if (confirm) {
+			location.reload();
+		}
+
+	</script>
+</body>
+
+</html>
