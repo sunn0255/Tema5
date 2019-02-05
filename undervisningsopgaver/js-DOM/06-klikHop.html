@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		.firkant {
+			height: 200px;
+			width: 200px;
+			background-color: green;
+			line-height: 200px;
+			text-align: center;
+		}
+
+		.sirkel {
+			border-radius: 100px;
+			background-color: red;
+			height: 200px;
+			width: 200px;
+			line-height: 200px;
+			text-align: center;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="content">
+		<div class="firkant"></div>
+		<div class="sirkel"></div>
+	</div>
+
+	<script>
+		let firkantURL = "http://helf-kea.dk/test/frog.png";
+		let sirkelURL = `http://helf-kea.dk/test/gris.png`;
+
+		document.addEventListener("DOMcontentLoaded", start);
+
+		function start() {
+			console.log("start");
+			let firkant = document.querySelector(".firkant");
+			let sirkel = document.querySelector(".sirkel");
+
+			firkant.innerHTML = `<img src = ${firkantURL} alt="grønn firkant >`;
+			sirkel.innerHTML = `<img src = ${sirkelURL} alt="rød sirkel" >`;
+
+			sirkel.addEventListener("click", stopp);
+			firkant.addEventListener("click", flytt);
+		}
+
+		function flytt() {
+			let firkantStart = firkant.innerHTML;
+			firkant.innerHTML = sirkel.innerHTML;
+			sirkel.innerHTML = firkantStart;
+
+		}
+
+		function stopp() {
+
+		}
+
+	</script>
+</body>
+
+</html>
