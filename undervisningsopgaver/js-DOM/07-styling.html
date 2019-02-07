@@ -13,6 +13,7 @@
 			background-color: green;
 			line-height: 200px;
 			text-align: center;
+			z-index: 0;
 		}
 
 		.cirkel {
@@ -22,6 +23,7 @@
 			width: 200px;
 			line-height: 200px;
 			text-align: center;
+			z-index: 2;
 		}
 
 	</style>
@@ -51,10 +53,12 @@
 			cirkel.addEventListener("click", stop);
 
 			function flyt() {
+				firkant.style.position = "absolute";
+				firkant.style.top = "0";
 
-				let firkantStart = firkant.innerHTML;
-				firkant.innerHTML = cirkel.innerHTML;
-				cirkel.innerHTML = firkantStart;
+				//let firkantStart = firkant.innerHTML;
+				//firkant.innerHTML = cirkel.innerHTML;
+				//cirkel.innerHTML = firkantStart;
 
 			}
 
