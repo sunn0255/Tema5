@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		.dyr {
+			border: 1px solid black;
+		}
+
+		#liste {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="liste">
+		<!-- <div class="dyr">
+			<h3></h3>
+			<p> </p>
+			<img src="" alt="">
+			<p></p>
+		</div> -->
+	</div>
+
+	<script>
+		let dyr = [{
+			"navn": "gris",
+			"type": "pattedyr",
+			"billede": "http://helf-kea.dk/test/gris.png",
+			"levested": "svinefarm"
+		}, {
+			"navn": "frø",
+			"type": "amfibie",
+			"billede": "http://helf-kea.dk/test/frog.png",
+			"levested": "tjern"
+		}, {
+			"navn": "ræv",
+			"type": "pattedyr",
+			"billede": "http://helf-kea.dk/test/fox.png",
+			"levested": "skogen"
+		}, {
+			"navn": "sild",
+			"type": "fisk",
+			"billede": "http://helf-kea.dk/test/sild.jpg",
+			"levested": "havet"
+		}, {
+			"navn": "krokodille",
+			"type": "krybdyr",
+			"billede": "http://helf-kea.dk/test/kroko.jpg",
+			"levested": "jungelen"
+		}];
+
+		console.log(dyr);
+
+		let dest = document.querySelector("#liste");
+
+		document.addEventListener("DOMContentLoaded", visDyr);
+
+		function visDyr() {
+			console.log("start");
+
+			dyr.forEach(dyr => {
+				dest.innerHTML += `
+						<div class="dyr"> <h3>${dyr.navn}<h3/> <p>${dyr.type}<p/> <p>${dyr.levested}<p/>
+						<img src = "${dyr.billede}" alt="${dyr.navn}">
+					<div/>`
+			})
+		}
+
+	</script>
+</body>
+
+</html>
