@@ -19,7 +19,7 @@
 
 		}
 
-		p {
+		a {
 			font-size: 1.5rem;
 			font-family: monospace;
 			font-weight: 200;
@@ -68,7 +68,7 @@
 
 				person.forEach(person => {
 					dest.innerHTML += `
-						<div class="person"> <h2>${person.navn}<h2/><img src = "${person.billede}" alt="${person.navn}"> <p>${person.github}<p/>
+						<div class="person"> <h2>${person.navn}<h2/><img src = "${person.billede}" alt="${person.navn}"> <a href="https://github.com/${person.github}">${person.github}<a/>
 
 					<div/>`
 				})
