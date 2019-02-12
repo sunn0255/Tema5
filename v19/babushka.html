@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<script></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		.madrett {
+			border: 10px solid darkorange;
+			background-color: #78824a;
+			border-radius: 8px;
+			margin: .5vw;
+		}
+
+		#liste {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			margin: 4vw;
+
+
+		}
+
+		a {
+			font-size: 1.5rem;
+			font-family: monospace;
+			color: black;
+			margin-left: 4vw;
+			font-weight: 200;
+			line-height: 1vw;
+			text-decoration: overline;
+		}
+
+		a:hover {
+			color: #e3f2a2;
+		}
+
+		img {
+			width: 100%;
+			/*max-width: 20vw;*/
+
+		}
+
+		h2,
+		h1 {
+			font-family: fantasy;
+			text-align: center;
+		}
+
+		p {
+			font-size: 1rem;
+			font-family: monospace;
+		}
+
+		.menu {
+			text-align: center;
+		}
+
+		button {
+			font-family: fantasy;
+			width: 10vw;
+			height: 5vw;
+			background-color: #e3f2a2;
+			border-radius: 10px;
+
+		}
+
+		button:hover {
+			background-color: #78824a;
+		}
+
+		.valgt {
+			background-color: darkorange;
+		}
+
+	</style>
+</head>
+
+<body>
+	<h1>Alle</h1>
+	<div class="menu">
+		<button class="filter" data-hold="alle">Alle</button>
+		<button class="filter" data-hold="forretter">Forrett</button>
+		<button class="filter" data-hold="hovedretter">Hovedrett</button>
+		<button class="filter" data-hold="desserter">Dessert</button>
+		<button class="filter" data-hold="drikkevarer">Drikkevarer</button>
+	</div>
+	<div id="liste">
+	</div>
+
+	<script>
+		let madrett = [];
+		let filter = "alle";
+		let dest = document.querySelector("#liste");
+		//let temp = document.querySelector("template");
+		document.addEventListener("DOMContentLoaded", start);
+
+		function start() {
+			console.log("start");
+			async function getJson() {
+
+				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+				madrett = await jsonData.json();
+
+
+
+				//document.querySelector("click", sorter);
+
+				//				function sorter() {
+
+
+
+				//	}
+
+				visMadrett();
+			}
+
+
+			function visMadrett() {
+				console.log("viser madretter");
+				dest.innerHTML = "";
+				madrett.forEach(madrett => {
+					if (filter == "alle" || filter == madrett.kategori) {
+						dest.innerHTML += `
+						<div class="madrett"> <h2>${madrett.navn}<h2/><img src = "imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}"><p>"${madrett.kort}"<p/> <p>kr ${madrett.pris}<p/>
+
+					<div/>`;
+					}
+				})
+			}
+
+
+			/*	document.querySelector(".order").addEventListener("click", order);
+
+				function order() {
+					//console.log("order", person);
+					person.sort((a, b) => {
+						return (a.alder - b.alder);
+					});
+					visPerson();
+
+				}*/
+			document.querySelectorAll(".filter").forEach(elm => {
+				elm.addEventListener("click", filtrering);
+			})
+
+
+
+
+
+			function filtrering() {
+				filter = this.getAttribute("data-hold");
+				document.querySelector("h1").textContent = this.textContent;
+				document.querySelectorAll(".filter").forEach(elm => {
+					elm.classList.remove("valgt");
+				})
+				this.classList.add("valgt");
+				console.log("FILTER", filter);
+				visMadrett();
+			}
+			getJson();
+		}
+
+	</script>
+</body>
+
+</html>

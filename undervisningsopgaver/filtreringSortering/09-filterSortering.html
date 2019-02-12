@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		h1 {
+			margin-left: 45vw;
+		}
+
+		.person {
+			border: 2px solid black;
+			background-color: #78824a;
+			border-radius: 8px;
+			margin: .05vw;
+		}
+
+		#liste {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			margin: 4vw;
+
+
+		}
+
+		a {
+			font-size: 1.5rem;
+			font-family: monospace;
+			color: black;
+			margin-left: 4vw;
+			font-weight: 200;
+			line-height: 1vw;
+			text-decoration: overline;
+		}
+
+		a:hover {
+			color: #e3f2a2;
+		}
+
+		img {
+			width: 100%;
+			max-width: 40vw;
+		}
+
+		h2 {
+			font-family: fantasy;
+		}
+
+		.menu {
+			margin-left: 32vw;
+			position: fixed;
+		}
+
+		button {
+			font-family: fantasy;
+			width: 10vw;
+			height: 5vw;
+			background-color: #e3f2a2;
+			border-radius: 10px;
+
+		}
+
+		button:hover {
+			background-color: #78824a;
+		}
+
+		.valgt {
+			background-color: orangered;
+		}
+
+	</style>
+</head>
+
+<body>
+	<h1>Alle</h1>
+	<div class="menu">
+		<button class="filter" data-hold="alle">Alle</button>
+		<button class="filter" data-hold="a">Hold A</button>
+		<button class="filter" data-hold="b">Hold B</button>
+		<button class="order" data-hold="alder">Alder</button>
+		<button class="filter" data-hold="køn">Køn</button>
+	</div>
+	<div id="liste">
+	</div>
+
+	<script>
+		let person = [];
+		let filter = "alle";
+		let dest = document.querySelector("#liste");
+		//let temp = document.querySelector("template");
+		document.addEventListener("DOMContentLoaded", start);
+
+		function start() {
+			console.log("start");
+			async function getJson() {
+
+				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+				person = await jsonData.json();
+
+
+
+				//document.querySelector("click", sorter);
+
+				//				function sorter() {
+
+
+
+				//	}
+
+				visPerson();
+			}
+
+
+			function visPerson() {
+				console.log("viser personer");
+				dest.innerHTML = "";
+				person.forEach(person => {
+					if (filter == "alle" || filter == person.hold) {
+						dest.innerHTML += `
+						<div class="person"> <h2>${person.navn}<h2/><img src = "${person.billede}" alt="${person.navn}">Alder<a href="${person.alder}">${person.alder}<a/>
+
+					<div/>`;
+					}
+				})
+			}
+
+
+			document.querySelector(".order").addEventListener("click", order);
+
+			function order() {
+				//console.log("order", person);
+				person.sort((a, b) => {
+					return (a.alder - b.alder);
+				});
+				visPerson();
+
+			}
+			document.querySelectorAll(".filter").forEach(elm => {
+				elm.addEventListener("click", filtrering);
+			})
+
+
+
+
+
+			function filtrering() {
+				filter = this.getAttribute("data-hold");
+				document.querySelector("h1").textContent = this.textContent;
+				document.querySelectorAll(".filter").forEach(elm => {
+					elm.classList.remove("valgt");
+				})
+				this.classList.add("valgt");
+				console.log("FILTER", filter);
+				visPerson();
+			}
+			getJson();
+		}
+
+	</script>
+</body>
+
+</html>

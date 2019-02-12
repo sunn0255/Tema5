@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		.person {
+			border: 2px solid black;
+			background-color: #78824a;
+		}
+
+		#liste {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			margin: 4vw;
+
+		}
+
+		a {
+			font-size: 1.5rem;
+			font-family: monospace;
+			font-weight: 200;
+			line-height: 1vw;
+		}
+
+		img {
+			width: 100%;
+			max-width: 40vw;
+		}
+
+		h2 {
+			font-family: fantasy;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="liste">
+	</div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", start);
+		let person = [];
+		let filter = "b";
+
+		function start() {
+			console.log("start");
+			async function getJson() {
+
+				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+				person = await jsonData.json();
+				visPerson();
+			}
+
+
+
+
+			let dest = document.querySelector("#liste");
+
+			document.addEventListener("DOMContentLoaded", visPerson);
+
+
+			function visPerson() {
+				console.log("viser personer");
+
+				person.forEach(person => {
+					if (person.hold == filter) {
+						dest.innerHTML += `
+						<div class="person"> <h2>${person.navn}<h2/><img src = "${person.billede}" alt="${person.navn}"> <a href="https://github.com/${person.github}">${person.github}<a/>
+
+					<div/>`;
+					}
+				})
+			}
+			getJson();
+		}
+
+	</script>
+</body>
+
+</html>
