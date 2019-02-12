@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		#singleview {
+			width: 100vw;
+			height: 100vh;
+			background-color: red;
+			top: 0;
+		}
+
+		#indhold {
+			box-sizing: border-box;
+			background-color: azure;
+			width: 90vw;
+			height: 90vh;
+			margin: auto;
+		}
+
+		#luk {
+			box-sizing: border-box;
+			text-align: right;
+			padding-right: 1em;
+		}
+
+		#luk button {
+			font-size: 2em;
+			background-color: azure;
+		}
+
+		html {
+			overflow-y: hidden;
+		}
+
+		#luk {
+			position: absolute;
+			right: -3%;
+			top: 3%;
+			font-size: 3rem;
+
+		}
+
+		#indhold {
+			box-sizing: border-box;
+			background-color: lightblue;
+			position: absolute;
+			top: 5%;
+			left: 10%;
+			width: 80vw;
+			height: 53vw;
+		}
+
+		.overskrift {
+			text-align: center;
+			color: #3b4f55;
+			font-family: sans-serif;
+			text-decoration: underline;
+		}
+
+		.person {
+			border: 3px solid #ffffff;
+			border-radius: 10px;
+			margin: ;
+			text-align: center;
+			background-color: lightblue;
+
+		}
+
+		img {
+			max-width: 40vw;
+			border-radius: 20%;
+			height: 100px;
+		}
+
+		p {
+			background-color: #c6ecf8;
+			max-width: 80%;
+			margin: 20px auto;
+			padding: 10px;
+			border-radius: 10px;
+
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="singleview">
+		<div id="luk"><button>X</button></div>
+		<div id="indhold"></div>
+	</div>
+	<script>
+		let person = [];
+		let filter = "alle";
+		let dest = document.querySelector("#liste");
+
+		document.addEventListener("DOMContentLoaded", start);
+
+		function start() {
+			console.log("single view");
+			async function getJson() {
+
+				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+				person = await jsonData.json();
+				console.log("get json");
+
+
+				åbn();
+			}
+
+			let dest = document.querySelector("#liste");
+
+			function åbn() {
+				console.log("åbner");
+			}
+
+			getJson();
+		}
+
+	</script>
+</body>
+
+</html>

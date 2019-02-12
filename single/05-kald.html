@@ -9,6 +9,7 @@
 	<style>
 		h1 {
 			margin-left: 45vw;
+			font-family: fantasy;
 		}
 
 		.person {
@@ -25,17 +26,20 @@
 		}
 
 		a {
-			font-size: 1.5rem;
-			font-family: monospace;
+			font-size: 1rem;
 			color: black;
-			margin-left: 4vw;
+			margin-left: 1vw;
 			font-weight: 200;
 			line-height: 1vw;
-			text-decoration: overline;
 		}
 
 		a:hover {
 			color: #e3f2a2;
+		}
+
+		p {
+			font-family: monospace;
+			text-align: center;
 		}
 
 		img {
@@ -47,14 +51,20 @@
 			font-family: fantasy;
 		}
 
+		nav {
+			position: fixed;
+		}
+
 		.menu {
 			margin-left: 32vw;
-			position: fixed;
+			position: absolute;
+			top: 1vw;
+			left: 42vw;
 		}
 
 		button {
 			font-family: fantasy;
-			width: 10vw;
+			width: 5vw;
 			height: 5vw;
 			background-color: #e3f2a2;
 			border-radius: 10px;
@@ -75,6 +85,7 @@
 			background-color: red;
 			position: fixed;
 			top: 0;
+			display: none;
 		}
 
 		#indhold {
@@ -100,6 +111,8 @@
 			overflow-y: hidden;
 		}
 
+		*/
+
 	</style>
 </head>
 
@@ -109,18 +122,24 @@
 		<div id="indhold"></div>
 	</div>
 	<header>
+
 		<h1>Alle</h1>
-		<div class="menu">
+		<nav class="menu">
 			<button class="filter" data-hold="alle">Alle</button>
 			<button class="filter" data-hold="a">Hold A</button>
 			<button class="filter" data-hold="b">Hold B</button>
 			<button class="order" data-hold="alder">Alder</button>
-			<button class="filter" data-hold="køn">Køn</button>
-		</div>
+			<!-- <button class="filter" data-hold="køn">Køn</button> -->
+		</nav>
 	</header>
-	<div id="liste">
-	</div>
+	<section id="liste">
+		<!-- 	<article class="person"></article>
+		<article class="person"></article>
+		<article class="person"></article>
+		<article class="person"></article> -->
+	</section>
 
+	<footer></footer>
 	<script>
 		let person = [];
 		let filter = "alle";
@@ -134,8 +153,6 @@
 
 				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
 				person = await jsonData.json();
-
-
 				visPerson();
 			}
 
@@ -145,14 +162,45 @@
 				dest.innerHTML = "";
 				person.forEach(person => {
 					if (filter == "alle" || filter == person.hold) {
-						dest.innerHTML += `
-						<div class="person"> <h2>${person.navn}<h2/><img src = "${person.billede}" alt="${person.navn}">Alder<a href="${person.alder}">${person.alder}<a/>
+						let template =
+							`<article class="person">
+                            <h2>${person.navn}</h2>
+                            <img src ="${person.billede}" alt="${person.navn}">
+                             </article> `;
 
-					<div/>`;
+						dest.insertAdjacentHTML("beforeend", template);
+						dest.lastElementChild.addEventListener("click", () => {
+							location.href = "07-singleview.html?github=" + person.github;
+
+						});
+
+						function åbn() {
+							document.querySelector("#indhold").innerHTML =
+								`<article class="person">
+                            <h2>${person.navn}</h2>
+                            <img src ="${person.billede}" alt="${person.navn}">
+                            <p> Github navn: ${person.github} <br>
+                            Alder:   ${person.alder} <br>
+                            Køn:  ${person.køn} <br>
+                            Email: ${person.email} <br>
+                            Hold:  ${person.hold} <br>
+                            Historie:  ${person.historie} <br>  </p>
+                            </article>
+                    `;
+							//document.querySelector("#popup").style.display = "block";
+
+						}
 					}
 				})
 			}
+			document.querySelector("#luk").addEventListener("click", () => {
+				document.querySelector("#popup").style.display = "none";
+			})
 
+			document.querySelectorAll(".filter").forEach(elm => {
+				elm.addEventListener("click", filtrering);
+
+			})
 
 
 

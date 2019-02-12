@@ -75,6 +75,7 @@
 			background-color: red;
 			position: fixed;
 			top: 0;
+			display: none;
 		}
 
 		#indhold {
@@ -109,18 +110,24 @@
 		<div id="indhold"></div>
 	</div>
 	<header>
+
 		<h1>Alle</h1>
-		<div class="menu">
+		<nav class="menu">
 			<button class="filter" data-hold="alle">Alle</button>
 			<button class="filter" data-hold="a">Hold A</button>
 			<button class="filter" data-hold="b">Hold B</button>
 			<button class="order" data-hold="alder">Alder</button>
 			<button class="filter" data-hold="køn">Køn</button>
-		</div>
+		</nav>
 	</header>
-	<div id="liste">
-	</div>
+	<section id="liste">
+		<article class="person"></article>
+		<article class="person"></article>
+		<article class="person"></article>
+		<article class="person"></article>
+	</section>
 
+	<footer></footer>
 	<script>
 		let person = [];
 		let filter = "alle";
@@ -145,10 +152,26 @@
 				dest.innerHTML = "";
 				person.forEach(person => {
 					if (filter == "alle" || filter == person.hold) {
-						dest.innerHTML += `
-						<div class="person"> <h2>${person.navn}<h2/><img src = "${person.billede}" alt="${person.navn}">Alder<a href="${person.alder}">${person.alder}<a/>
+						let template = ` <article class = "person">
+							<h2> $ {person.navn} </h2> <img class = "billede"
+						src = "${person.billede}"
+						alt = "${person.navn}" >
+							<p> Github: <a href = "http://github.com/${person.github}"
+						target = "_blank"> $ {person.github
+							} </a></p><p> $ {person.hold
+							} </p> Alder<p>"${person.alder}" </p>
+							</article>`;
+						dest.insertAdjacentHTML("beforeend", template);
+						dest.lastElementChild.addEventListener("click", åbn);
 
-					<div/>`;
+						function åbn() {
+							document.querySelector("#indhold").innerHTML = `<
+								article class = "person" >
+								<h2> $ {person.navn} </h2>
+								<img class = "billede" src = "${person.billede}" alt = "${person.navn}">
+								<p> Hold: $ {person.hold}, Alder: ${person.alder} </p> </article> `;
+							document.querySelector("#popup").style.display = "block";
+						}
 					}
 				})
 			}
