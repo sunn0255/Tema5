@@ -4,27 +4,31 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative|Felipa|Major+Mono+Display|Miss+Fajardose|Righteous|Staatliches" rel="stylesheet">
 	<title></title>
 	<link rel="stylesheet" href="">
-</head>
 
-<body>
-	<script></script>
-</body>
 
-</html>
-<!DOCTYPE html>
-<html lang="">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
-	<link rel="stylesheet" href="">
 	<style>
+		body {
+			background-color: #7396A7;
+		}
+
+		header {
+			background-color: #325E73;
+			position: fixed;
+			top: 0;
+			width: 100vw;
+			left: 0;
+		}
+
+		#header-flex {
+			display: flex;
+		}
+
 		.madrett {
-			border: 10px solid darkorange;
-			background-color: #78824a;
+			border: 10px solid #A81E25;
+			background-color: #ECEEF4;
 			border-radius: 8px;
 			margin: .5vw;
 		}
@@ -33,13 +37,13 @@
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr 1fr;
 			margin: 4vw;
-
+			margin-top: 14vw;
 
 		}
 
 		a {
 			font-size: 1.5rem;
-			font-family: monospace;
+			font-family: righteous;
 			color: black;
 			margin-left: 4vw;
 			font-weight: 200;
@@ -58,28 +62,63 @@
 		}
 
 		h2,
-		h1 {
-			font-family: fantasy;
+		h1,
+		h3 {
+			font-family: felipa;
 			text-align: center;
+			color: #38191E;
+		}
+
+		header h1 {
+			position: absolute;
+			font-size: 5vw;
+			top: -1.8vw;
+			left: 17vw;
+		}
+
+		h4 {
+			font-family: righteous;
+			text-align: center;
+			color: #38191E;
+			position: absolute;
+			top: 4.5vw;
+			left: 25vw;
+		}
+
+		header h3 {
+			position: absolute;
+			top: -1.1vw;
+			right: 1.7vw;
+			padding: .8vw;
+			border: .2vw dotted #A81E25;
 		}
 
 		p {
 			font-size: 1rem;
 			font-family: monospace;
+			text-align: center;
 		}
 
 		.menu {
 			text-align: center;
 		}
 
-		button {
-			font-family: fantasy;
-			width: 10vw;
-			height: 5vw;
-			background-color: #e3f2a2;
-			border-radius: 10px;
-
+		nav {
+			z-index: 2;
+			position: absolute;
+			left: 67vw;
+			top: 8.5vw;
 		}
+
+		button {
+			font-family: righteous;
+			padding: .5vw;
+			background-color: #325E73;
+			border-radius: 10px;
+			color: #38191E;
+			border: .3vw dotted #A81E25;
+		}
+
 
 		button:hover {
 			background-color: #78824a;
@@ -89,21 +128,48 @@
 			background-color: darkorange;
 		}
 
+		#headerbillede {
+			z-index: 0;
+			margin-top: .5vw;
+			margin-left: 1vw;
+		}
+
+		#headerbillede img {
+			max-width: 15vw;
+			border-radius: 50%;
+			margin-bottom: .5vw;
+
+		}
+
 	</style>
 </head>
 
 <body>
-	<h1>Alle</h1>
-	<div class="menu">
-		<button class="filter" data-hold="alle">Alle</button>
-		<button class="filter" data-hold="forretter">Forrett</button>
-		<button class="filter" data-hold="hovedretter">Hovedrett</button>
-		<button class="filter" data-hold="desserter">Dessert</button>
-		<button class="filter" data-hold="drikkevarer">Drikkevarer</button>
+
+	<header>
+		<div id="header-flex">
+			<div id="headerbillede"><img src="imgs/Soviet-Food-Azerbaijani-Dish-CCCP-USSR-Russian-Classic-Wall-Stickers-Canvas-Painting-Vintage-Poster-Home-Bar.jpg_640x640.jpg" alt="madbillede"></div>
+			<h3>Alle</h3>
+			<div id="rest-name">
+				<h1>Babuschka</h1>
+				<h4>Bistro</h4>
+			</div>
+		</div>
+
+		<nav class="menu">
+			<button class="filter" data-hold="alle">Alle</button>
+			<button class="filter" data-hold="forretter">Forretter</button>
+			<button class="filter" data-hold="hovedretter">Hovedretter</button>
+			<button class="filter" data-hold="desserter">Desserter</button>
+			<button class="filter" data-hold="drikkevarer">Drikke</button>
+		</nav>
+	</header>
+	<div id="popup">
+		<!-- <div id="luk"><button>X</button></div> -->
+		<div id="indhold"></div>
 	</div>
 	<div id="liste">
 	</div>
-
 	<script>
 		let madrett = [];
 		let filter = "alle";
@@ -119,15 +185,6 @@
 				madrett = await jsonData.json();
 
 
-
-				//document.querySelector("click", sorter);
-
-				//				function sorter() {
-
-
-
-				//	}
-
 				visMadrett();
 			}
 
@@ -137,42 +194,65 @@
 				dest.innerHTML = "";
 				madrett.forEach(madrett => {
 					if (filter == "alle" || filter == madrett.kategori) {
-						dest.innerHTML += `
-						<div class="madrett"> <h2>${madrett.navn}<h2/><img src = "imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}"><p>"${madrett.kort}"<p/> <p>kr ${madrett.pris}<p/>
+						let template =
+							`<article class="madrett">
+                            <h2>${madrett.navn}</h2>
+                            <img src ="imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}">
 
-					<div/>`;
+                             </article> `;
+
+						dest.insertAdjacentHTML("beforeend", template);
+						dest.lastElementChild.addEventListener("click", () => {
+							location.href = "singleview.html?billede=" + madrett.billede;
+
+						});
+
+						function åpne() {
+							document.querySelector("#indhold").innerHTML =
+								`<article class="madrett">
+							<h2>${madrett.navn}</h2>
+							<img src="imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}">
+    						<p>${madrett.kort} <br>
+							Pris: ${madrett.pris} <br>
+							Beskrivelse: ${madrett.lang} <br>
+							Oprinnelse: ${madrett.oprinnelse}</p>
+							</article>`;
+
+						}
 					}
 				})
 			}
+			//document.querySelector("#luk").addEventListener("click", () => {
+			//	document.querySelector("#popup").style.display = "none";
+			//})
 
-
-			/*	document.querySelector(".order").addEventListener("click", order);
-
-				function order() {
-					//console.log("order", person);
-					person.sort((a, b) => {
-						return (a.alder - b.alder);
-					});
-					visPerson();
-
-				}*/
 			document.querySelectorAll(".filter").forEach(elm => {
 				elm.addEventListener("click", filtrering);
-			})
 
+			})
 
 
 
 
 			function filtrering() {
 				filter = this.getAttribute("data-hold");
-				document.querySelector("h1").textContent = this.textContent;
+				document.querySelector("h3").textContent = this.textContent;
 				document.querySelectorAll(".filter").forEach(elm => {
 					elm.classList.remove("valgt");
 				})
 				this.classList.add("valgt");
 				console.log("FILTER", filter);
 				visMadrett();
+
+				document.querySelector(".order").addEventListener("click", order);
+
+				function order() {
+					console.log("order", kategori);
+					person.sort((a, b) => {
+						return (a.alder - b.alder);
+					});
+					vismadrett();
+				}
 			}
 			getJson();
 		}
