@@ -166,10 +166,7 @@
 			<button class="filter" data-hold="drikkevarer">Drikke</button>
 		</nav>
 	</header>
-	<div id="popup">
-		<!-- <div id="luk"><button>X</button></div> -->
-		<div id="indhold"></div>
-	</div>
+
 	<div id="liste">
 	</div>
 	<script>
@@ -208,33 +205,14 @@
 							location.href = "singleview.html?billede=" + madrett.billede;
 
 						});
-
-						function åpne() {
-							document.querySelector("#indhold").innerHTML =
-								`<article class="madrett">
-							<h2>${madrett.navn}</h2>
-							<img src="imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}">
-    						<p>${madrett.kort} <br>
-							Pris: ${madrett.pris} <br>
-							Beskrivelse: ${madrett.lang} <br>
-							Oprinnelse: ${madrett.oprinnelse}</p>
-							</article>`;
-
-						}
 					}
 				})
 			}
-			//document.querySelector("#luk").addEventListener("click", () => {
-			//	document.querySelector("#popup").style.display = "none";
-			//})
 
 			document.querySelectorAll(".filter").forEach(elm => {
 				elm.addEventListener("click", filtrering);
 
 			})
-
-
-
 
 			function filtrering() {
 				filter = this.getAttribute("data-hold");

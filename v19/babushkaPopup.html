@@ -57,8 +57,6 @@
 
 		img {
 			width: 100%;
-			/*max-width: 20vw;*/
-
 		}
 
 		h2,
@@ -231,21 +229,21 @@
 					if (filter == "alle" || filter == madrett.kategori) {
 						let template = `
 						<article class = "madrett">
-						<h2> ${madrett.navn}</h2><img class = "billede"
-						src = "imgs/small/${madrett.billede}-sm.jpg"
-						alt = "${madrett.navn}" >
-						<p>Pris: ${madrett.pris} </p>
-						<p>Bedkrivelse:"${madrett.kort}" </p>
+							<h2> ${madrett.navn}</h2>
+							<img class = "billede" src = "imgs/small/${madrett.billede}-sm.jpg" alt = "${madrett.navn}" >
+							<p>Pris: ${madrett.pris},- </p>
+							<p>Bedkrivelse:"${madrett.kort}" </p>
 						</article>`;
 						dest.insertAdjacentHTML("beforeend", template);
 						dest.lastElementChild.addEventListener("click", åpne);
 
 						function åpne() {
 							document.querySelector("#indhold").innerHTML = `
-								<article class = "madrett">
+							<article class = "madrett">
 								<h2>${madrett.navn}</h2>
-								<img class = "billede" src = "imgs/small/${madrett.billede}-sm.jpg" alt = "${madrett.navn}">
-								<p>Beskrivelse: ${madrett.lang} <br>Pris: ${madrett.pris},- </p> </article> `;
+								<img class = "billede" src = "imgs/small/${madrett.billede}-sm.jpg" alt ="${madrett.navn}">
+								<p>Beskrivelse: ${madrett.lang} <br>Pris: ${madrett.pris},- </p>
+							</article> `;
 							document.querySelector("#popup").style.display = "block";
 						}
 					}
@@ -255,8 +253,6 @@
 			document.querySelector("#luk button").addEventListener("click", () => {
 				document.querySelector("#popup").style.display = "none";
 			})
-
-
 
 
 			document.querySelector(".order").addEventListener("click", order);
@@ -272,9 +268,6 @@
 			document.querySelectorAll(".filter").forEach(elm => {
 				elm.addEventListener("click", filtrering);
 			})
-
-
-
 
 
 			function filtrering() {

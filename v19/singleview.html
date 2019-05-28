@@ -133,13 +133,12 @@
 				console.log("åpner");
 				document.querySelector("#indhold").innerHTML =
 					`<article class="madrett">
-				<h2>${madrett.navn}</h2>
-				<img src="imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}">
-    			<h3>${madrett.kort}<h3/>
-				<p>Beskrivelse: ${madrett.lang} <br>
-				Oprindelse: ${madrett.oprindelse} <br>
-				Pris: ${madrett.pris},-<p/>
-				</article>`;
+						<h2>${madrett.navn}</h2>
+						<img src="imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}">
+    					<h3>${madrett.kort}<h3/>
+						<p>Beskrivelse: ${madrett.lang} <br> Oprindelse: ${madrett.oprindelse} <br>
+						Pris: ${madrett.pris},-<p/>
+					</article>`;
 			}
 
 			document.querySelector("#tilbage").addEventListener("click", () => {
