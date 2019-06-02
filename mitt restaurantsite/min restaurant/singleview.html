@@ -4,92 +4,97 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Arapey|Cinzel+Decorative|Felipa|Major+Mono+Display|Miss+Fajardose|Gentium+Basic|Nanum+Myeongjo|Righteous|Staatliches" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Galdeano|Orienta&display=swap" rel="stylesheet">
 	<title></title>
 	<link rel="stylesheet" href="">
 	<style>
-		#singleview {
-			width: 100vw;
-			height: 100vh;
-			background-color: #325E73;
-			top: 0;
-		}
+		@media only screen and (min-width: 800px) {
+			#singleview {
+				width: 100vw;
+				height: 100vh;
+				background-color: #8C7F3E;
+				top: 0;
+			}
 
-		#indhold {
-			box-sizing: border-box;
-			position: absolute;
-			width: 80vw;
-			height: 53vw;
-			top: 2%;
-			left: 10%;
-			margin: auto;
-			border-radius: 10vw;
-		}
+			#indhold {
+				box-sizing: border-box;
+				position: absolute;
+				width: 70vw;
+				height: 56vw;
+				top: 5%;
+				left: 15%;
+				margin: auto;
+			}
 
-		html {
-			overflow-y: hidden;
-		}
+			html {
+				overflow-y: hidden;
+			}
 
-		.overskrift {
-			text-align: center;
-			color: #3b4f55;
-			font-family: sans-serif;
-			text-decoration: underline;
-		}
+			.madrett {
+				border: 3px solid rgba(0, 0, 0, .1);
+				margin: 2vw;
+				text-align: center;
+				background-color: rgba(0, 0, 0, .1);
 
-		.madrett {
-			border: 3px solid darkorange;
-			border-radius: 30px;
-			margin: 2vw;
-			text-align: center;
-			background-color: #78824a;
-			border-radius: 10vw;
+			}
 
-		}
+			img {
+				max-width: 40vw;
+				width: 450px;
+				height: 300px;
+				margin-top: -3vw;
+				margin-left: 0vw;
+				border: 5px solid white;
+			}
 
-		img {
-			max-width: 40vw;
-			border-radius: 100%;
-			height: 200px;
-			margin-top: -3vw;
-			margin-left: 0vw;
-			border: 5px solid #A81E25;
-		}
+			#beskrivelse {
+				width: 40vw;
+				margin-left: 12.5vw;
+			}
 
-		p {
-			background-color: #c6ecf8;
-			font-family: monospace;
-			max-width: 90%;
-			margin: 1px auto;
-			padding: 5px;
-			border-radius: 10px;
-			color: #38191E;
-		}
+			p {
+				font-family: galdeano;
+				max-width: 90%;
+				margin: 1px auto;
+				padding: 5px;
+				color: white;
+				font-weight: 100;
+			}
 
-		#tilbage button {
-			width: 5vw;
-			height: 5vw;
-			font-weight: 600;
-			background-color: black;
-			color: #78824a;
-		}
+			#tilbage button {
+				width: 5vw;
+				height: 5vw;
+				font-weight: 600;
+				background-color: rgba(0, 0, 0, .1);
+				color: white;
+				border-color: white;
+			}
 
-		h2,
-		h1 {
-			font-family: felipa;
-			font-size: 4vw;
-			text-align: center;
-			color: #38191E;
-		}
 
-		h3 {
-			background-color: #c6ecf8;
-			font-family: monospace;
-			max-width: 75%;
-			margin: 10px auto;
-			padding: 7px;
-			border-radius: 10px;
-			color: #38191E;
+			h1 {
+				font-family: Galdeano;
+				font-size: 4vw;
+				margin-top: 2vw;
+				margin-bottom: 4vw;
+				text-align: center;
+				color: white;
+			}
+
+
+			h2 {
+				font-family: Galdeano;
+				font-size: 4vw;
+				text-align: center;
+				color: white;
+			}
+
+			h3 {
+				font-family: Galdeano;
+				max-width: 75%;
+				margin: 10px auto;
+				padding: 7px;
+				color: white;
+			}
 		}
 
 	</style>
@@ -115,7 +120,7 @@
 			console.log("singleview");
 			async function getJson() {
 
-				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1F4_caeGS8Qb9Yoer0JxqvVNMDGEW-chc1Sba3FcBZ-w");
 				madrett = await jsonData.json();
 				console.log("get json");
 				madrett.forEach(obj => {
@@ -133,16 +138,16 @@
 				console.log("åpner");
 				document.querySelector("#indhold").innerHTML =
 					`<article class="madrett">
-						<h2>${madrett.navn}</h2>
-						<img src="imgs/small/${madrett.billede}-sm.jpg" alt="${madrett.navn}">
-    					<h3>${madrett.kort}<h3/>
-						<p>Beskrivelse: ${madrett.lang} <br> Oprindelse: ${madrett.oprindelse} <br>
-						Pris: ${madrett.pris},-<p/>
+						<h1>${madrett.titel}</h1>
+						<img src="imgs/mat/${madrett.billede}.jpg" alt="${madrett.titel}">
+						<div id= "beskrivelse"><p> ${madrett.beskrivelse} <br>
+						Pris: ${madrett.pris},-<p/></div>
 					</article>`;
 			}
 
+
 			document.querySelector("#tilbage").addEventListener("click", () => {
-				location.href = "babushka.html"
+				location.href = "meny.html"
 			})
 
 			getJson();

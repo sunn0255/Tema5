@@ -1,0 +1,304 @@
+body {
+	margin: auto;
+}
+
+img {
+	width: 100%;
+}
+
+#logo img {
+	height: 32vw;
+	margin-top: 12vw;
+}
+
+p {
+	font-family: Galdeano;
+	color: white;
+}
+
+#logo {
+	position: absolute;
+	width: 50vw;
+	height: 30w;
+	z-index: 2;
+}
+
+#icon img {
+	width: 10vw;
+	margin-left: 80vw;
+	margin-top: 2vw;
+	z-index: 3;
+}
+
+#header_logo {
+	position: absolute;
+	width: 7vw;
+	height: 5vw;
+	z-index: 2;
+	left: 2vw;
+	top: 1vw;
+}
+
+
+a {
+	font-family: galdeano;
+	text-decoration: none;
+	color: white;
+	margin-left: 1vw;
+
+}
+
+
+#splashbillede img {
+	margin: 2vw;
+	margin-top: 57vw;
+	margin-bottom: 40vw;
+}
+
+#hovednav {
+	display: none;
+	position: absolute;
+	flex-direction: column;
+	margin-left: 48vw;
+	margin-top: 1vw;
+}
+
+#hovednav a {
+	background: black;
+	padding: 3vw;
+	width: 40vw;
+	text-align: center;
+}
+
+#forside,
+#kontakt,
+#omOs,
+#meny {
+	background: #8C7F3E;
+}
+
+
+header {
+	position: fixed;
+	height: 30vw;
+	width: 100vw;
+	background: rgba(0, 0, 0, .1);
+	left: 0;
+	top: 0;
+}
+
+#omOs h2 {
+	text-align: center;
+	color: white;
+	margin-top: 8vw;
+	font-family: Galdeano;
+}
+
+#tekstcontainer {
+	width: 50vw;
+	margin-left: 5vw;
+	margin-right: 8vw;
+}
+
+#omosBilledeBlueDown1,
+#omosBilledeBlueDown2,
+#omosBilledeBlueDown3 {
+	display: none;
+}
+
+#omosContainer {
+	display: flex;
+	width: 100vw;
+	margin-top: 20vw;
+}
+
+#omosBillede1 img,
+#omosBillede2 img,
+#omosBillede3 img {
+	width: 30vw;
+	height: 30vw;
+	margin-right: 2vw;
+	margin-bottom: 10vw;
+	margin-top: 6vw;
+}
+
+#omostekst {
+	margin-left: 5vw;
+}
+
+#kontakt {
+	margin-top: 30vw;
+}
+
+#kontaktTekst {
+	width: 90vw;
+	margin-left: 5vw;
+}
+
+
+#some {
+	display: flex;
+	justify-content: center;
+}
+
+#instagram {
+	width: 5vw;
+	height: 5vw;
+	margin-top: 1.8vw;
+}
+
+#facebook {
+	width: 8vw;
+	height: 8vw;
+}
+
+@media only screen and (min-width: 800px) {
+
+	header {
+		height: 7vw;
+		width: 100vw;
+		left: 0;
+		top: 0;
+	}
+
+	#meny header {
+		height: 7vw;
+	}
+
+	#icon {
+		display: none;
+	}
+
+	#hovednav {
+		margin-left: 78vw;
+		margin-top: 1.2vw;
+		display: flex;
+		flex-direction: row;
+	}
+
+	#hovednav a {
+		background: none;
+		padding: 0vw;
+		width: auto;
+		text-align: center;
+	}
+
+	#hovednav a:hover {
+		color: black;
+	}
+
+	#header_logo {
+		position: absolute;
+		width: 7vw;
+		height: 5vw;
+		z-index: 2;
+		left: 2vw;
+		top: 1vw;
+	}
+
+	#logo {
+		position: absolute;
+		width: 40vw;
+		height: 10vw;
+		z-index: 2;
+		left: 30vw;
+	}
+
+
+
+	#splashbillede img {
+		width: 90vw;
+		height: 100vh;
+		margin-left: 4vw;
+		margin-top: 7vw;
+		margin-bottom: auto;
+	}
+
+	#omosContainer {
+		display: flex;
+		width: 100vw;
+		margin-top: 0vw;
+	}
+
+	#billedeContainer {
+		width: 50vw;
+		margin-left: 5vw;
+
+	}
+
+
+
+	#tekstcontainer {
+		margin-left: 5vw;
+		width: 40vw;
+		height: 70vh;
+		margin-top: 0vw;
+		margin-right: 10vw;
+	}
+
+	#omosBillede1 img,
+	#omosBillede2 img,
+	#omosBillede3 img {
+		width: 13vw;
+		height: 13vw;
+
+	}
+
+	#omosBilledeBlueDown1,
+	#omosBilledeBlueDown2,
+	#omosBilledeBlueDown3 {
+		width: 13vw;
+		height: 14vw;
+		display: block;
+	}
+
+	#omosBilleder1,
+	#omosBilleder2 {
+		display: flex;
+		position: absolute;
+	}
+
+	#omosBilleder2 {
+		top: 18vw;
+		margin-top: 11vw;
+	}
+
+	#omosBilleder1 {
+		margin-top: 1.5vw;
+	}
+
+	#kontaktContainer {
+		display: flex;
+		margin-bottom: 2vw;
+	}
+
+	#facebook {
+		width: 2vw;
+		height: 2vw;
+	}
+
+	#kart img {
+		width: 30vw;
+		margin-top: 15vw;
+		margin-left: 15vw;
+	}
+
+	#kontaktTekst {
+		width: 35vw;
+		margin-top: 13.5vw;
+		margin-left: 5vw;
+	}
+
+	#instagram {
+		width: 1.1vw;
+		height: 1.1vw;
+		margin-top: .5vw;
+	}
+
+	#some {
+		display: flex;
+		justify-content: center;
+		margin-bottom: .5vw;
+	}
+
+}

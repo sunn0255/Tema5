@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Galdeano|Orienta&display=swap" rel="stylesheet">
+	<title></title>
+	<link rel="stylesheet" href="styles.css">
+
+	<style>
+		.madrett {
+			background-color: rgba(0, 0, 0, .1);
+			border-radius: 0px;
+			margin: 1vw;
+			cursor: pointer;
+
+		}
+
+		#liste {
+			width: 60vw;
+			display: block;
+			margin: 4vw;
+			margin-left: 20vw;
+		}
+
+		#filtermenu {
+			text-align: center;
+			display: flex;
+			position: fixed;
+			top: 20vw;
+			left: 10vw;
+			background-color: rgba(0, 0, 0, .1);
+		}
+
+		.filter {
+			font-family: galdeano;
+			padding: .5vw;
+			margin: 1vw;
+			background-color: rgba(0, 0, 0, .1);
+			color: white;
+			text-align: center;
+
+		}
+
+		#meny {
+			margin-top: 40vw;
+		}
+
+		@media only screen and (min-width: 800px) {
+
+			#meny {
+				margin-top: 10vw;
+			}
+
+			.madrett {
+				background-color: rgba(0, 0, 0, .1);
+				border-radius: 0px;
+				margin: 1vw;
+				cursor: pointer;
+			}
+
+
+			#liste {
+				width: 60vw;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				margin: 4vw;
+				margin-left: 17vw;
+			}
+
+			.madrett img {
+				width: 400px;
+				height: 205px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			img {
+				width: 100%;
+				max-width: 20vw;
+			}
+
+			h2,
+			h1,
+			h3 {
+				font-family: galdeano;
+				text-align: center;
+				color: #38191E;
+			}
+
+			h4 {
+				font-family: galdeano;
+				text-align: center;
+				color: #38191E;
+				position: absolute;
+				top: 4.5vw;
+				left: 25vw;
+			}
+
+			p {
+				font-size: 1rem;
+				font-family: galdeano;
+				text-align: center;
+				color: black;
+			}
+
+			#filtermenu {
+				text-align: center;
+				display: block;
+				position: fixed;
+				left: 0vw;
+				background-color: rgba(0, 0, 0, .1);
+				top: 20vw;
+			}
+
+			.filter {
+				font-family: galdeano;
+				padding: .5vw;
+				background-color: rgba(0, 0, 0, .1);
+				color: #38191E;
+				width: 7vw;
+				text-align: start;
+			}
+
+
+
+			.filter:hover {
+				background-color: #8C7F3E;
+			}
+
+			.valgt {
+				background-color: darkorange;
+			}
+
+			#meny header {
+				background-color: rgba(0, 0, 0, .1);
+			}
+		}
+
+	</style>
+
+</head>
+
+<body id="meny">
+
+	<header>
+
+		<a href="index.html">
+			<div id="header_logo"><img src="imgs/Artboard%201.svg" alt="logo"></div>
+		</a>
+		<a href="javascript:void(0);" id="icon" onclick="myFunction()">
+			<img src="imgs/icons8-menu.svg" alt="burgermenu">
+		</a>
+		<nav id="hovednav">
+			<a href="omOs.html">OM OSS</a>
+			<a href="meny.html">MENY</a>
+			<a href="kontakt.html">KONTAKT</a>
+		</nav>
+
+	</header>
+	<main id="madmeny">
+		<nav id="filtermenu">
+			<div class="filter" data-rett="alle">Alle</div>
+			<div class="filter" data-rett="Forretter">Forretter</div>
+			<div class="filter" data-rett="Hovedretter">Hovedretter</div>
+			<div class="filter" data-rett="Desserter">Desserter</div>
+			<div class="filter" data-rett="Drikkevarer">Drikke</div>
+		</nav>
+		<div id="liste">
+		</div>
+	</main>
+	<footer>
+		<div id="some">
+			<img id="facebook" src="imgs/facebook.png" alt="">
+			<img id="instagram" src="imgs/instagram-32.png" alt="">
+		</div>
+	</footer>
+	<script>
+		let madrett = [];
+		let filter = "alle";
+		let dest = document.querySelector("#liste");
+		//let temp = document.querySelector("template");
+		document.addEventListener("DOMContentLoaded", start);
+
+		function start() {
+			console.log("start");
+			async function getJson() {
+
+				let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1F4_caeGS8Qb9Yoer0JxqvVNMDGEW-chc1Sba3FcBZ-w");
+				madrett = await jsonData.json();
+
+
+				visMadrett();
+			}
+
+
+			function visMadrett() {
+				console.log("viser madretter");
+				dest.innerHTML = "";
+				madrett.forEach(madrett => {
+					if (filter == "alle" || filter == madrett.kategori) {
+						let template =
+							`<article class="madrett">
+                     
+                            <img src ="imgs/mat/${madrett.billede}.jpg" alt="${madrett.titel}">
+							<h2>${madrett.titel}</h2>
+                             </article> `;
+
+						dest.insertAdjacentHTML("beforeend", template);
+						dest.lastElementChild.addEventListener("click", () => {
+							location.href = "singleview.html?billede=" + madrett.billede;
+
+						});
+					}
+				})
+			}
+
+			document.querySelectorAll(".filter").forEach(elm => {
+				elm.addEventListener("click", filtrering);
+
+			})
+
+			function filtrering() {
+				filter = this.getAttribute("data-rett");
+				document.querySelector("h3").textContent = this.textContent;
+				document.querySelectorAll(".filter").forEach(elm => {
+					elm.classList.remove("valgt");
+				})
+				this.classList.add("valgt");
+				console.log("FILTER", filter);
+				visMadrett();
+
+				//				document.querySelector(".order").addEventListener("click", order);
+				//
+				// function order() {
+				// console.log("order", kategori);
+				// person.sort((a, b) => {
+				// return (a.alder - b.alder);
+				// });
+				// vismadrett();
+				// }
+			}
+			getJson();
+		}
+
+	</script>
+	<script src="script.js"></script>
+</body>
+
+</html>
