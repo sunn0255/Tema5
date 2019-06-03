@@ -57,6 +57,7 @@
 				background-color: rgba(0, 0, 0, .1);
 				border-radius: 0px;
 				margin: 1vw;
+				margin-bottom: 7vw;
 				cursor: pointer;
 			}
 
@@ -87,7 +88,11 @@
 			h3 {
 				font-family: galdeano;
 				text-align: center;
-				color: #38191E;
+				color: white;
+			}
+
+			h1 {
+				font-weight: 200;
 			}
 
 			h4 {
@@ -148,7 +153,7 @@
 	<header>
 
 		<a href="index.html">
-			<div id="header_logo"><img src="imgs/Artboard%201.svg" alt="logo"></div>
+			<div id="header_logo"><img src="imgs/logo.svg" alt="logo"></div>
 		</a>
 		<a href="javascript:void(0);" id="icon" onclick="myFunction()">
 			<img src="imgs/icons8-menu.svg" alt="burgermenu">
@@ -161,6 +166,8 @@
 
 	</header>
 	<main id="madmeny">
+		<h1>MENY</h1>
+
 		<nav id="filtermenu">
 			<div class="filter" data-rett="alle">Alle</div>
 			<div class="filter" data-rett="Forretter">Forretter</div>
@@ -224,7 +231,7 @@
 
 			function filtrering() {
 				filter = this.getAttribute("data-rett");
-				document.querySelector("h3").textContent = this.textContent;
+				//				document.querySelector("h3").textContent = this.textContent;
 				document.querySelectorAll(".filter").forEach(elm => {
 					elm.classList.remove("valgt");
 				})
