@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Galdeano|Orienta&display=swap" rel="stylesheet">
-	<title></title>
+	<title>FJAGG ‖ Meny</title>
 	<link rel="stylesheet" href="styles.css">
 
 	<style>
@@ -30,6 +30,7 @@
 			position: fixed;
 			top: 20vw;
 			left: 10vw;
+			z-index: 2;
 			background-color: rgba(0, 0, 0, .1);
 		}
 
@@ -153,7 +154,7 @@
 	<header>
 
 		<a href="index.html">
-			<div id="header_logo"><img src="imgs/logo.svg" alt="logo"></div>
+			<div id="header_logo"><img src="imgs/logo_min_restaurant.svg" alt="logo"></div>
 		</a>
 		<a href="javascript:void(0);" id="icon" onclick="myFunction()">
 			<img src="imgs/icons8-menu.svg" alt="burgermenu">
@@ -188,7 +189,6 @@
 		let madrett = [];
 		let filter = "alle";
 		let dest = document.querySelector("#liste");
-		//let temp = document.querySelector("template");
 		document.addEventListener("DOMContentLoaded", start);
 
 		function start() {
@@ -231,7 +231,6 @@
 
 			function filtrering() {
 				filter = this.getAttribute("data-rett");
-				//				document.querySelector("h3").textContent = this.textContent;
 				document.querySelectorAll(".filter").forEach(elm => {
 					elm.classList.remove("valgt");
 				})
@@ -239,15 +238,6 @@
 				console.log("FILTER", filter);
 				visMadrett();
 
-				//				document.querySelector(".order").addEventListener("click", order);
-				//
-				// function order() {
-				// console.log("order", kategori);
-				// person.sort((a, b) => {
-				// return (a.alder - b.alder);
-				// });
-				// vismadrett();
-				// }
 			}
 			getJson();
 		}

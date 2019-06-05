@@ -22,12 +22,13 @@ h1 {
 p {
 	font-family: Galdeano;
 	color: white;
+	font-size: 1rem;
 }
 
 #logo {
 	position: absolute;
 	width: 50vw;
-	height: 30w;
+	height: 30vw;
 	left: 30vw;
 	top: 60vw;
 	z-index: 2;
@@ -55,6 +56,7 @@ a {
 	text-decoration: none;
 	color: white;
 	margin-left: 1vw;
+	font-size: 1rem;
 
 }
 
@@ -71,6 +73,7 @@ a {
 	flex-direction: column;
 	margin-left: 48vw;
 	margin-top: 1vw;
+	z-index: 10;
 }
 
 #hovednav a {
@@ -210,7 +213,7 @@ header {
 		height: 5vw;
 		z-index: 2;
 		left: 2vw;
-		top: 1vw;
+		top: 2vw;
 	}
 
 	#logo {
